@@ -26,6 +26,7 @@ import { ChatModeButtonGroup } from "../../components/ChatModeButtonGroup";
 import { InfoContent } from "../../components/InfoContent/InfoContent";
 import { FolderPicker } from "../../components/FolderPicker";
 import { TagPickerInline } from "../../components/TagPicker";
+import ecylogo  from "../../assets/ecylogo.svg"
 import React from "react";
 
 const Chat = () => {
@@ -316,9 +317,10 @@ const Chat = () => {
                             {activeChatMode == ChatMode.WorkOnly ? 
                                 <div>
                                     <div className={styles.chatEmptyStateHeader}> 
-                                        <BuildingMultipleFilled fontSize={"100px"} primaryFill={"rgba(27, 74, 239, 1)"} aria-hidden="true" aria-label="Chat with your Work Data logo" />
+                                    <img src={ecylogo} width="500" height="300"/>
+                                        {/* <BuildingMultipleFilled fontSize={"100px"} primaryFill={"rgba(27, 74, 239, 1)"} aria-hidden="true" aria-label="Chat with your Work Data logo" /> */}
                                         </div>
-                                    <h1 className={styles.chatEmptyStateTitle}>Chat with your work data</h1>
+                                    <h1 className={styles.chatEmptyStateTitle}>Find answers to your questions on Procurement and Contracts</h1>
                                 </div>
                             : activeChatMode == ChatMode.WorkPlusWeb ?
                                 <div>
@@ -330,9 +332,10 @@ const Chat = () => {
                             : //else Ungrounded
                                 <div>
                                     <div className={styles.chatEmptyStateHeader}> 
-                                        <ChatSparkleFilled fontSize={"80px"} primaryFill={"rgba(0, 0, 0, 0.35)"} aria-hidden="true" aria-label="Chat logo" />
+                                        
                                     </div>
                                     <h1 className={styles.chatEmptyStateTitle}>Chat directly with a LLM</h1>
+                                    <img src={ecylogo} />
                                 </div>
                             }
                             <span className={styles.chatEmptyObjectives}>
@@ -409,7 +412,7 @@ const Chat = () => {
                         )}
                         <QuestionInput
                             clearOnSend
-                            placeholder="Type a new question (e.g. Who are Microsoft's top executives, provided as a table?)"
+                            placeholder="Type a new question (e.g. How do I reach the Contracts Manager?)"
                             disabled={isLoading}
                             onSend={question => makeApiRequest(question, defaultApproach, {}, {}, {})}
                             onAdjustClick={() => setIsConfigPanelOpen(!isConfigPanelOpen)}

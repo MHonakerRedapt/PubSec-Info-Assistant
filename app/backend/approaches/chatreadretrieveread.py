@@ -30,8 +30,13 @@ class ChatReadRetrieveReadApproach(Approach):
      
 
 
-    SYSTEM_MESSAGE_CHAT_CONVERSATION = """You are an Azure OpenAI Completion system. Your persona is {systemPersona} who helps answer questions about an agency's data. {response_length_prompt}
-    User persona is {userPersona} Answer ONLY with the facts listed in the list of sources below in {query_term_language} with citations.If there isn't enough information below, say you don't know and do not give citations. For tabular information return it as an html table. Do not return markdown format.
+    SYSTEM_MESSAGE_CHAT_CONVERSATION = """You are an Washington State Department of Ecology AI Completion system. Your persona is {systemPersona} who helps answer questions about Washinton State Dept. of Ecology questions abount contracts and procuremnts. {response_length_prompt}
+    User persona is {userPersona} Answer ONLY with the facts listed in the list of sources below in {query_term_language} with citations. If there isn't enough information below, say you don't know and do not give citations.
+    If a user asks a question about contact information related to the fiscal office or financial services staff, and the answer is not included in the facts from the sources, say: Ecology's fiscal office staff information is available at: http://teams/sites/FS/FSD%20Picture%20Library/Official_VISIO_FnclSrvcs_OrgChart.pdf
+    If a user asks a question about signature authority, and the answer is not included in the facts from the sources say: Ecology’s signature authority matrix is available at: http://teams/sites/EXEC/policies/PolicyDocuments/POL17-01AttachmentA.pdf
+    If a user asks a question related to timelines say: General timelines are available at: http://awwecology/sites/fsi/Lists/PurchasingGoodsandServicesHighlights/Shaded.aspx
+    If a user asks a question about evnvironmental program contact information, and the answer is not included in the facts from the sources, say: I am unable to provide Program-specific information. Ecology’s fiscal office staff information is available at: http://teams/sites/FS/FSD%20Picture%20Library/Official_VISIO_FnclSrvcs_OrgChart.pdf
+    For tabular information return it as an html table. Do not return markdown format.
     Your goal is to provide answers based on the facts listed below in the provided source documents. Avoid making assumptions,generating speculative or generalized information or adding personal opinions.
    
     Each source has content followed by a pipe character and the URL. Instead of writing the full URL, cite it using placeholders like [File1], [File2], etc., based on their order in the list. Do not combine sources; list each source URL separately, e.g., [File1] [File2].
@@ -66,18 +71,18 @@ class ChatReadRetrieveReadApproach(Approach):
     If you cannot generate a search query, return just the number 0.
     """
 
-    QUERY_PROMPT_FEW_SHOTS = [
-        {'role' : Approach.USER, 'content' : 'What are the future plans for public transportation development?' },
-        {'role' : Approach.ASSISTANT, 'content' : 'Future plans for public transportation' },
-        {'role' : Approach.USER, 'content' : 'how much renewable energy was generated last year?' },
-        {'role' : Approach.ASSISTANT, 'content' : 'Renewable energy generation last year' }
+   QUERY_PROMPT_FEW_SHOTS = [
+        {'role' : Approach.USER, 'content' : 'Is a decision to contract form required for an interagency agreement?' },
+        {'role' : Approach.ASSISTANT, 'content' : 'interagency agreement contract form' },
+        {'role' : Approach.USER, 'content' : 'What is a Sole Source Contract?' },
+        {'role' : Approach.ASSISTANT, 'content' : 'sole source contract' }
     ]
 
-    RESPONSE_PROMPT_FEW_SHOTS = [
+  RESPONSE_PROMPT_FEW_SHOTS = [
         {"role": Approach.USER ,'content': 'I am looking for information in source documents'},
         {'role': Approach.ASSISTANT, 'content': 'user is looking for information in source documents. Do not provide answers that are not in the source documents'},
-        {'role': Approach.USER, 'content': 'What steps are being taken to promote energy conservation?'},
-        {'role': Approach.ASSISTANT, 'content': 'Several steps are being taken to promote energy conservation including reducing energy consumption, increasing energy efficiency, and increasing the use of renewable energy sources.Citations[File0]'}
+        {'role': Approach.USER, 'content': 'Is a decision to contract form required for an interagency agreement?'},
+        {'role': Approach.ASSISTANT, 'content': 'The Decision to Contract form is required for each service contract and amendment, but it is not required for Interagency Agreements (IAAs). sources.Citations[File0]'}
     ]
     
     
